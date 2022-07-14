@@ -78,6 +78,7 @@ jobs:
       run: |
         docker run -d --name shipping-service-example -p 8080:8080 ignaciomontero2022/shipping-service-example:${{ github.sha }}
         sleep 30
+        curl --location --request GET '127.0.0.1/shipping/c'
     
     - name: Chequeo de microservicio en container.
       uses: gerdemann/http-status-code@1.0.0
