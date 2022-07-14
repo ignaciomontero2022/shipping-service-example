@@ -71,12 +71,12 @@ jobs:
         context: .
         load: true
         build-args: |
-          JAR_FILE=target/products-service-example-0.0.1-SNAPSHOT-spring-boot.jar
-        tags: ignaciomontero2022/products-service-example:${{ github.sha }}
+          JAR_FILE=target/shipping-service-example-0.0.1-SNAPSHOT-spring-boot.jar
+        tags: ignaciomontero2022/shipping-service-example:${{ github.sha }}
     
     - name: Levanto docker
       run: |
-        docker run -d --name products-service-example -p 8080:8080 ignaciomontero2022/products-service-example:${{ github.sha }}
+        docker run -d --name shipping-service-example -p 8080:8080 ignaciomontero2022/shipping-service-example:${{ github.sha }}
         sleep 30
     
     - name: Chequeo de microservicio en container.
@@ -93,5 +93,5 @@ jobs:
         context: .
         push: true
         build-args: |
-          JAR_FILE=target/products-service-example-0.0.1-SNAPSHOT-spring-boot.jar
-        tags: ignaciomontero2022/products-service-example:${{ github.sha }}
+          JAR_FILE=target/shipping-service-example-0.0.1-SNAPSHOT-spring-boot.jar
+        tags: ignaciomontero2022/shipping-service-example:${{ github.sha }}
