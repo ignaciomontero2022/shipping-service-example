@@ -51,75 +51,68 @@ jobs:
     #needs: Sonarcloud
     runs-on: ubuntu-latest
     steps:
-    # - name: Checkout del codigo desde GitHub.
-    #   uses: actions/checkout@v3
-    # - name: Setup del JDK.
-    #   uses: actions/setup-java@v1
-    #   with:
-    #     java-version: 8
-    # - name: Build con Maven.
-    #   run: mvn -B package --file pom.xml
+    - name: Checkout del codigo desde GitHub.
+      uses: actions/checkout@v3
+    - name: Setup del JDK.
+      uses: actions/setup-java@v1
+      with:
+        java-version: 8
+    - name: Build con Maven.
+      run: mvn -B package --file pom.xml
 
-    # - name: Login a Docker Hub  
-    #   uses: docker/login-action@v1
-    #   with:
-    #     username: ${{ secrets.DOCKER_USERNAME }}
-    #     password: ${{ secrets.DOCKER_PASSWORD }}
+    - name: Login a Docker Hub  
+      uses: docker/login-action@v1
+      with:
+        username: ${{ secrets.DOCKER_USERNAME }}
+        password: ${{ secrets.DOCKER_PASSWORD }}
     
-    # - name: Build de imagen.
-    #   uses: docker/build-push-action@v3
-    #   with:
-    #     context: .
-    #     load: true
-    #     build-args: |
-    #         JAR_FILE=target/shipping-service-example-0.0.1-SNAPSHOT-spring-boot.jar
-    #     tags: ignaciomontero2022/shipping-service-example:lasted
+    - name: Build de imagen.
+      uses: docker/build-push-action@v3
+      with:
+        context: .
+        load: true
+        build-args: |
+            JAR_FILE=target/shipping-service-example-0.0.1-SNAPSHOT-spring-boot.jar
+        tags: ignaciomontero2022/shipping-service-example:lasted
     
-    # - name: Levanto docker.
-    #   run: |
-    #     docker run -d --name shipping-service-example -p 8080:8080 ignaciomontero2022/shipping-service-example:lasted
-    #     sleep 10
+    - name: Levanto docker.
+      run: |
+        docker run -d --name shipping-service-example -p 8080:8080 ignaciomontero2022/shipping-service-example:lasted
+        sleep 10
             
-    # - name: Chequeo de microservicio en container.
-    #   uses: gerdemann/http-status-code@1.0.0
-    #   with:
-    #     url: ${{ secrets.URL_TEST }}
-    #     code: 200 
-    #     timeout: 60 
-    #     interval: 10    
+    - name: Chequeo de microservicio en container.
+      uses: gerdemann/http-status-code@1.0.0
+      with:
+        url: ${{ secrets.URL_TEST }}
+        code: 200 
+        timeout: 60 
+        interval: 10    
    
-    # - name: Buildeo y push a docker
-    #   uses: docker/build-push-action@v3
-    #   with:
-    #     context: .
-    #     push: true
-    #     build-args: |
-    #       JAR_FILE=target/shipping-service-example-0.0.1-SNAPSHOT-spring-boot.jar
-    #     tags: ignaciomontero2022/shipping-service-example:lasted 
+    - name: Buildeo y push a docker
+      uses: docker/build-push-action@v3
+      with:
+        context: .
+        push: true
+        build-args: |
+          JAR_FILE=target/shipping-service-example-0.0.1-SNAPSHOT-spring-boot.jar
+        tags: ignaciomontero2022/shipping-service-example:lasted 
     
     - name: Configure AWS Credentials.
       uses: aws-actions/configure-aws-credentials@v1
       with:
-        aws-access-key-id: "AKIA4MYSYYPWGXFX6LMH"
-        aws-secret-access-key: "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"
+        aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+        aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
         aws-region: us-east-1 
-
-    # - name: Instalo AWS CLI.
-    #   run: |
-    #     curl -L -o install-aws.sh https://raw.githubusercontent.com/unfor19/install-aws-cli-action/master/entrypoint.sh && 
-    #     chmod +x install-aws.sh
-    #     ./install-aws.sh "v2" "amd64"
-    #     rm install-aws.sh
+       
+    - uses: azure/setup-kubectl@v2.0
+      with:
+        version: 'v1.21'
         
-    # - uses: azure/setup-kubectl@v2.0
-    #   with:
-    #     version: 'v1.23.6'
-        
-    # - uses: tale/kubectl-action@v1
-    #   with:
-    #     base64-kube-config: ${{ secrets.KUBE_CONFIG }}
-    #     kubectl-version: v1.23.6
-    # - run: kubectl apply -f shipping.yaml
+    - uses: tale/kubectl-action@v1
+      with:
+        base64-kube-config: ${{ secrets.KUBE_CONFIG }}
+        kubectl-version: v1.21
+    - run: kubectl apply -f shipping.yaml
 
 
 
