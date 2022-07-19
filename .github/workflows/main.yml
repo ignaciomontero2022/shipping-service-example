@@ -7,95 +7,95 @@ on:
   
 jobs:
 
-  # Sonarcloud:
-  #   name: Escaneo con Sonarcloud
-  #   runs-on: ubuntu-latest
-  #   steps:
-  #     - name: Checkout del codigo desde GitHub.
-  #       uses: actions/checkout@v3
-  #       with:
-  #         fetch-depth: 0  
-  #     - name: Set up JDK 11.
-  #       uses: actions/setup-java@v1
-  #       with:
-  #         java-version: 11
-  #     - name: Cache SonarCloud packages.
-  #       uses: actions/cache@v1
-  #       with:
-  #         path: ~/.sonar/cache
-  #         key: ${{ runner.os }}-sonar
-  #         restore-keys: ${{ runner.os }}-sonar
-  #     - name: Cache Maven packages
-  #       uses: actions/cache@v1
-  #       with:
-  #         path: ~/.m2
-  #         key: ${{ runner.os }}-m2-${{ hashFiles('**/pom.xml') }}
-  #         restore-keys: ${{ runner.os }}-m2
-  #     - name: Escaneo con SoncarCloud.
-  #       env:
-  #         GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
-  #         SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-  #       run: mvn -B verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar -Dsonar.projectKey=${{ secrets.SONAR_PROJETKEY }}
+  Sonarcloud:
+    name: Escaneo con Sonarcloud
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout del codigo desde GitHub.
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0  
+      - name: Set up JDK 11.
+        uses: actions/setup-java@v1
+        with:
+          java-version: 11
+      - name: Cache SonarCloud packages.
+        uses: actions/cache@v1
+        with:
+          path: ~/.sonar/cache
+          key: ${{ runner.os }}-sonar
+          restore-keys: ${{ runner.os }}-sonar
+      - name: Cache Maven packages
+        uses: actions/cache@v1
+        with:
+          path: ~/.m2
+          key: ${{ runner.os }}-m2-${{ hashFiles('**/pom.xml') }}
+          restore-keys: ${{ runner.os }}-m2
+      - name: Escaneo con SoncarCloud.
+        env:
+          GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+        run: mvn -B verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar -Dsonar.projectKey=${{ secrets.SONAR_PROJETKEY }}
       
-  #     - name: Chequeo de SonarCloud Quality Gate. 
-  #       uses: sonarsource/sonarqube-quality-gate-action@master
-  #       timeout-minutes: 5 
-  #       env: 
-  #         SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-  #       with:
-  #         scanMetadataReportFile: target/sonar/report-task.txt
+      - name: Chequeo de SonarCloud Quality Gate. 
+        uses: sonarsource/sonarqube-quality-gate-action@master
+        timeout-minutes: 5 
+        env: 
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+        with:
+          scanMetadataReportFile: target/sonar/report-task.txt
           
 
   build_imagen_a_container:
     name: Buildeo de imagen, test y publicación a AWS.
-    #needs: Sonarcloud
+    needs: Sonarcloud
     runs-on: ubuntu-latest
     steps:
-    # - name: Checkout del codigo desde GitHub.
-    #   uses: actions/checkout@v3
-    # - name: Setup del JDK.
-    #   uses: actions/setup-java@v1
-    #   with:
-    #     java-version: 8
-    # - name: Build con Maven.
-    #   run: mvn -B package --file pom.xml
+    - name: Checkout del codigo desde GitHub.
+      uses: actions/checkout@v3
+    - name: Setup del JDK.
+      uses: actions/setup-java@v1
+      with:
+        java-version: 8
+    - name: Build con Maven.
+      run: mvn -B package --file pom.xml
 
-    # - name: Login a Docker Hub  
-    #   uses: docker/login-action@v1
-    #   with:
-    #     username: ${{ secrets.DOCKER_USERNAME }}
-    #     password: ${{ secrets.DOCKER_PASSWORD }}
+    - name: Login a Docker Hub  
+      uses: docker/login-action@v1
+      with:
+        username: ${{ secrets.DOCKER_USERNAME }}
+        password: ${{ secrets.DOCKER_PASSWORD }}
     
-    # - name: Build de imagen.
-    #   uses: docker/build-push-action@v3
-    #   with:
-    #     context: .
-    #     load: true
-    #     build-args: |
-    #         JAR_FILE=target/shipping-service-example-0.0.1-SNAPSHOT-spring-boot.jar
-    #     tags: ignaciomontero2022/shipping-service-example:latest
+    - name: Build de imagen.
+      uses: docker/build-push-action@v3
+      with:
+        context: .
+        load: true
+        build-args: |
+            JAR_FILE=target/shipping-service-example-0.0.1-SNAPSHOT-spring-boot.jar
+        tags: ignaciomontero2022/shipping-service-example:latest
     
-    # - name: Levanto docker.
-    #   run: |
-    #     docker run -d --name shipping-service-example -p 8080:8080 ignaciomontero2022/shipping-service-example:latest
-    #     sleep 10
+    - name: Levanto docker.
+      run: |
+        docker run -d --name shipping-service-example -p 8080:8080 ignaciomontero2022/shipping-service-example:latest
+        sleep 10
             
-    # - name: Chequeo de microservicio en container.
-    #   uses: gerdemann/http-status-code@1.0.0
-    #   with:
-    #     url: ${{ secrets.URL_TEST }}
-    #     code: 200 
-    #     timeout: 60 
-    #     interval: 10    
+    - name: Chequeo de microservicio en container.
+      uses: gerdemann/http-status-code@1.0.0
+      with:
+        url: ${{ secrets.URL_TEST }}
+        code: 200 
+        timeout: 60 
+        interval: 10    
    
-    # - name: Buildeo y push a docker
-    #   uses: docker/build-push-action@v3
-    #   with:
-    #     context: .
-    #     push: true
-    #     build-args: |
-    #       JAR_FILE=target/shipping-service-example-0.0.1-SNAPSHOT-spring-boot.jar
-    #     tags: ignaciomontero2022/shipping-service-example:latest 
+    - name: Buildeo y push a docker
+      uses: docker/build-push-action@v3
+      with:
+        context: .
+        push: true
+        build-args: |
+          JAR_FILE=target/shipping-service-example-0.0.1-SNAPSHOT-spring-boot.jar
+        tags: ignaciomontero2022/shipping-service-example:latest 
     
     - name: Login a AWS Credentials.
       uses: aws-actions/configure-aws-credentials@v1
