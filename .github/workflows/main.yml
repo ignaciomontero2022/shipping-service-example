@@ -90,7 +90,6 @@ jobs:
     
     - name: Creacion de deployments en EKS.
     - uses: danielr1996/kubectl-action@1.0.0
-    
       with:
         kubeconfig: ${{ secrets.KUBE_CONFIG }}
         args: apply -f shipping.yaml
