@@ -75,7 +75,7 @@ jobs:
             JAR_FILE=target/shipping-service-example-0.0.1-SNAPSHOT-spring-boot.jar
         tags: ignaciomontero2022/shipping-service-example:lasted
     
-    - name: Levanto docker y hago test.
+    - name: Levanto docker.
       run: |
         docker run -d --name shipping-service-example -p 8080:8080 ignaciomontero2022/shipping-service-example:lasted
         sleep 30
