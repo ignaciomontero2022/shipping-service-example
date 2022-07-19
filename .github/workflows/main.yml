@@ -102,7 +102,7 @@ jobs:
       with:
         aws-access-key-id: ASIASKYSB4LW5BPYVF5K
         aws-secret-access-key: fsLVlXV9i6vNosiBUkBt7qXOejTRDd2PgfXYiZen
-        aws_session_token: FwoGZXIvYXdzEOX//////////wEaDJyxaR1SiLGdAT+hMSK+AejC7ny6X235J3juh/s1M34WVQ3oSQhyjEn9+o4jMHdJRn0QFEhl/u1dPsubI46ZdPm0Y/gEKvl2euksNn+Rdd5OUF6urNtPywOEG+aq9Rdtx4xJB028swwTZSpKSpGMjlhb1Oheibp+qZLW7OWrPFW1n9D//K/xVC5/1svS3IW9FeAwGE0cMfR1BnDUK9gjnBrFSHs7H3w9A6LyNYbrowmoAZSUt9gbED+PhRFywq0dDyA2eowrOAOnJvDO2GEopJHclgYyLS+BGvazATsNY35EurQlkwU8pbgqmsgKWjnN+HCJ965Vn/L8wBYoMWsNH6y2ew==
+        aws-session-token: FwoGZXIvYXdzEOX//////////wEaDJyxaR1SiLGdAT+hMSK+AejC7ny6X235J3juh/s1M34WVQ3oSQhyjEn9+o4jMHdJRn0QFEhl/u1dPsubI46ZdPm0Y/gEKvl2euksNn+Rdd5OUF6urNtPywOEG+aq9Rdtx4xJB028swwTZSpKSpGMjlhb1Oheibp+qZLW7OWrPFW1n9D//K/xVC5/1svS3IW9FeAwGE0cMfR1BnDUK9gjnBrFSHs7H3w9A6LyNYbrowmoAZSUt9gbED+PhRFywq0dDyA2eowrOAOnJvDO2GEopJHclgYyLS+BGvazATsNY35EurQlkwU8pbgqmsgKWjnN+HCJ965Vn/L8wBYoMWsNH6y2ew==
 
         aws-region: us-east-1 
        
