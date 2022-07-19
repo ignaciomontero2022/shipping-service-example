@@ -96,11 +96,15 @@ jobs:
         build-args: |
           JAR_FILE=target/shipping-service-example-0.0.1-SNAPSHOT-spring-boot.jar
         tags: ignaciomontero2022/shipping-service-example:lasted 
-   
+      
+    - uses: azure/setup-kubectl@v2.0
+      with:
+        version: 'v1.23.6'
+        
     - uses: tale/kubectl-action@v1
       with:
         base64-kube-config: ${{ secrets.KUBE_CONFIG }}
-        kubectl-version: v1.21.9
+        kubectl-version: v1.23.6
     - run: kubectl apply -f shipping.yaml
 
 
