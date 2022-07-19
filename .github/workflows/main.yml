@@ -102,9 +102,8 @@ jobs:
       with:
         aws-access-key-id: "ASIASKYSB4LW2W3YBQPQ"
         aws-secret-access-key: "2bG5J2+E+klW1dZ53l0puWzG0W/XBOPzuAMZvsjJ"
-        aws-region: us-east-1  
-        role-skip-session-tagging: true
-
+        aws-region: us-east-1 
+        
     - uses: azure/setup-kubectl@v2.0
       with:
         version: 'v1.23.6'
