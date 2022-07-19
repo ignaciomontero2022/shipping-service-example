@@ -88,11 +88,11 @@ jobs:
         timeout: 60 
         interval: 10    
     
-    - name: Creacion de deployments en EKS.
-    - uses: danielr1996/kubectl-action@1.0.0
+    - name: Deploy
+      uses: danielr1996/kubectl-action@1.0.0
       with:
         kubeconfig: ${{ secrets.KUBE_CONFIG }}
-        args: apply -f shipping.yaml
+        args: apply -f deployment.yaml
 
 
     # - name: Buildeo y push a docker
