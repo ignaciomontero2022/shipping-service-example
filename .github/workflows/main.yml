@@ -97,12 +97,10 @@ jobs:
           JAR_FILE=target/shipping-service-example-0.0.1-SNAPSHOT-spring-boot.jar
         tags: ignaciomontero2022/shipping-service-example:lasted 
    
-    - name: Deploy
-      uses: tale/kubectl-action@v1
+    - uses: tale/kubectl-action@v1
       with:
         base64-kube-config: ${{ secrets.KUBE_CONFIG }}
-        kubectl-version: v1.22.0
-        run: kubectl apply -f shipping.yaml
+    - run: kubectl apply -f shipping.yaml
 
 
 
