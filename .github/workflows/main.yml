@@ -97,30 +97,29 @@ jobs:
     #       JAR_FILE=target/shipping-service-example-0.0.1-SNAPSHOT-spring-boot.jar
     #     tags: ignaciomontero2022/shipping-service-example:lasted 
     
-    # - name: Configure AWS Credentials.
-    #   uses: aws-actions/configure-aws-credentials@v1
-    #   with:
-    #     aws-access-key-id: "ASIASKYSB4LW2W3YBQPQ"
-    #     aws-secret-access-key: "2bG5J2+E+klW1dZ53l0puWzG0W/XBOPzuAMZvsjJ"
-    #     role-to-assume: "arn:aws:iam::160562275053:role/LabRole"
-    #     aws-region: us-east-1 
+    - name: Configure AWS Credentials.
+      uses: aws-actions/configure-aws-credentials@v1
+      with:
+        aws-access-key-id: "AKIA4MYSYYPWGXFX6LMH"
+        aws-secret-access-key: "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"
+        aws-region: us-east-1 
 
-    - name: Instalo AWS CLI.
-      run: |
-        curl -L -o install-aws.sh https://raw.githubusercontent.com/unfor19/install-aws-cli-action/master/entrypoint.sh && 
-        chmod +x install-aws.sh
-        ./install-aws.sh "v2" "amd64"
-        rm install-aws.sh
+    # - name: Instalo AWS CLI.
+    #   run: |
+    #     curl -L -o install-aws.sh https://raw.githubusercontent.com/unfor19/install-aws-cli-action/master/entrypoint.sh && 
+    #     chmod +x install-aws.sh
+    #     ./install-aws.sh "v2" "amd64"
+    #     rm install-aws.sh
         
-    - uses: azure/setup-kubectl@v2.0
-      with:
-        version: 'v1.23.6'
+    # - uses: azure/setup-kubectl@v2.0
+    #   with:
+    #     version: 'v1.23.6'
         
-    - uses: tale/kubectl-action@v1
-      with:
-        base64-kube-config: ${{ secrets.KUBE_CONFIG }}
-        kubectl-version: v1.23.6
-    - run: kubectl apply -f shipping.yaml
+    # - uses: tale/kubectl-action@v1
+    #   with:
+    #     base64-kube-config: ${{ secrets.KUBE_CONFIG }}
+    #     kubectl-version: v1.23.6
+    # - run: kubectl apply -f shipping.yaml
 
 
 
