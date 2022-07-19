@@ -27,7 +27,7 @@ spec:
     spec:
       containers:
       - name: shipping-app
-        image: ignaciomontero2022/shipping-service-example:lasted
+        image: ignaciomontero2022/shipping-service-example:latest
         resources:
           requests:
             memory: "500Mi"
