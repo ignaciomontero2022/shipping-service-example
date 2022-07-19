@@ -110,12 +110,14 @@ jobs:
       with:
         version: 'v1.23.6'
         
-    - name: Deploy a cluster de EKS.
+    - name: Cargo configuración de Kubectl.
       uses: tale/kubectl-action@v1
       with:
         base64-kube-config: ${{ secrets.KUBE_CONFIG }}
         kubectl-version: v1.23.6
-    - run: kubectl apply -f  shipping.yaml
+    
+    - name: Deploy de imagen a EKS. 
+      run: kubectl apply -f  shipping.yaml
 
 
 
