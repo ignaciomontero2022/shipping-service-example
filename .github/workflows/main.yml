@@ -111,8 +111,9 @@ jobs:
         chmod +x install-aws.sh
         ./install-aws.sh "v2" "amd64"
         rm install-aws.sh
-        aws s3 ls
-
+        aws configure import --csv 
+        pwd
+        
     - uses: azure/setup-kubectl@v2.0
       with:
         version: 'v1.23.6'
