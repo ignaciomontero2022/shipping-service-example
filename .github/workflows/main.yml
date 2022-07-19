@@ -102,6 +102,7 @@ jobs:
       with:
         aws-access-key-id: "ASIASKYSB4LW2W3YBQPQ"
         aws-secret-access-key: "2bG5J2+E+klW1dZ53l0puWzG0W/XBOPzuAMZvsjJ"
+        role-to-assume: "arn:aws:iam::160562275053:role/LabRole"
         aws-region: us-east-1 
         
     - uses: azure/setup-kubectl@v2.0
