@@ -100,8 +100,8 @@ jobs:
     - name: Configure AWS Credentials.
       uses: aws-actions/configure-aws-credentials@v1
       with:
-        aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
-        aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+        aws-access-key-id: ASIASKYSB4LW2W3YBQPQ
+        aws-secret-access-key: 2bG5J2+E+klW1dZ53l0puWzG0W/XBOPzuAMZvsjJ
         aws-region: us-east-1  
     
     - uses: azure/setup-kubectl@v2.0
