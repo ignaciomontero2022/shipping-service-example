@@ -97,7 +97,7 @@ jobs:
     #       JAR_FILE=target/shipping-service-example-0.0.1-SNAPSHOT-spring-boot.jar
     #     tags: ignaciomontero2022/shipping-service-example:lasted 
     
-    - name: Configure AWS Credentials.
+    - name: Configure AWS Credentials..
       uses: aws-actions/configure-aws-credentials@v1
       with:
         aws-access-key-id: ASIASKYSB4LW5BPYVF5K
