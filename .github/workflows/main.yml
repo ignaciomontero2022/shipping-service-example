@@ -115,7 +115,7 @@ jobs:
       with:
         base64-kube-config: ${{ secrets.KUBE_CONFIG }}
         kubectl-version: v1.23.6
-      run: kubectl apply -f  shipping.yaml
+    - run: kubectl apply -f  shipping.yaml
 
 
 
