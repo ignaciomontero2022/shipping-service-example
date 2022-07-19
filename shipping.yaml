@@ -3,7 +3,7 @@ kind: Service
 metadata:
   name: shipping-service
 spec:
-  clusterIP: 10.0.1.12
+  clusterIP: 172.20.1.10
   selector:
     app: shipping-app
   ports:
