@@ -78,7 +78,7 @@ jobs:
     - name: Levanto docker.
       run: |
         docker run -d --name shipping-service-example -p 8080:8080 ignaciomontero2022/shipping-service-example:lasted
-        sleep 30
+        sleep 10
             
     - name: Chequeo de microservicio en container.
       uses: gerdemann/http-status-code@1.0.0
