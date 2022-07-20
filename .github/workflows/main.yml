@@ -46,7 +46,7 @@ jobs:
           scanMetadataReportFile: target/sonar/report-task.txt
           
 
-   Build_imagen_y_deploy:
+  Build_imagen_y_deploy:
     name: Buildeo de imagen, test y publicación a AWS.
     needs: Sonarcloud
     runs-on: ubuntu-latest
